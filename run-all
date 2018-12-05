@@ -10,4 +10,8 @@ echo -n "2.1: "
 ./checksum.lua input.txt
 echo -n "2.2: "
 ./boxes.lua input.txt
-
+cd ../3
+echo -n "3.1: "
+./overlapping.py input.txt
+echo -n "3.2: "
+./intact.py input.txt
