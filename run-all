@@ -17,3 +17,6 @@ echo -n "3.2: "
 ./intact.py input.txt
 cd ../4
 java Strategy1.java input.txt
+cd ../5
+cc polymer.c && ./a.out input.txt
+
