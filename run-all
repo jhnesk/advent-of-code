@@ -1,20 +1,15 @@
 #!/usr/bin/env sh
 
-cd 2018/1
-./1.sh input.txt
-./2.sh input.txt
-cd ../2
+./2018/1/1.sh 2018/1/input.txt
+./2018/1/2.sh 2018/1/input.txt
 echo -n "2.1: "
-./checksum.lua input.txt
+./2018/2/checksum.lua 2018/2/input.txt
 echo -n "2.2: "
-./boxes.lua input.txt
-cd ../3
+./2018/2/boxes.lua 2018/2/input.txt
 echo -n "3.1: "
-./overlapping.py input.txt
+./2018/3/overlapping.py 2018/3/input.txt
 echo -n "3.2: "
-./intact.py input.txt
-cd ../4
-java Strategy1.java input.txt
-cd ../5
-cc polymer.c && ./a.out input.txt
+./2018/3/intact.py 2018/3/input.txt
+java 2018/4/Strategy1.java 2018/4/input.txt
+cc 2018/5/polymer.c && ./a.out 2018/5/input.txt
 
