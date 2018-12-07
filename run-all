@@ -1,10 +1,8 @@
 #!/usr/bin/env sh
 
 cd 2018/1
-echo -n "1.1: "
 ./1.sh input.txt
-echo -n "1.2: "
-./2.pl input.txt
+./2.sh input.txt
 cd ../2
 echo -n "2.1: "
 ./checksum.lua input.txt
