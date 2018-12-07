@@ -2,7 +2,7 @@
 echo -n "1.2: "
 
 SUM=0
-for i in $(seq 1 150) ; do
+while true ; do
 	while read line; do
 		SUM=$(($SUM$line))
 		echo $SUM
