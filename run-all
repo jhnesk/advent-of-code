@@ -12,4 +12,4 @@ echo -n "3.2: "
 ./2018/3/intact.py 2018/3/input.txt
 java 2018/4/Strategy1.java 2018/4/input.txt
 cc 2018/5/polymer.c && ./a.out 2018/5/input.txt
-
+rustc 2018/7/sleigh.rs && ./sleigh 2018/7/input.txt
