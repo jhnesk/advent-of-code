@@ -8,3 +8,7 @@ I try and use different tools and approaches each day, just for fun.
 - Day 3: Python
 - Day 4: Java
 - Day 5: C
+- Day 6: R
+- Day 7: Rust
+- Day 8: Haskell
+
