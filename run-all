@@ -13,3 +13,6 @@ echo -n "3.2: "
 java 2018/4/Strategy1.java 2018/4/input.txt
 cc 2018/5/polymer.c && ./a.out 2018/5/input.txt && rm a.out
 rustc 2018/7/sleigh.rs && ./sleigh 2018/7/input.txt && rm sleigh
+echo -n "8.1: "
+ghc 2018/8/LicenseSum.hs && ./2018/8/LicenseSum 2018/8/input.txt
+
