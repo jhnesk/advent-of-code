@@ -15,4 +15,7 @@ cc 2018/05/polymer.c && ./a.out 2018/05/input.txt && rm a.out
 rustc 2018/07/sleigh.rs && ./sleigh 2018/07/input.txt && rm sleigh
 echo -n "8.1: "
 ghc 2018/08/LicenseSum.hs 1>/dev/null && ./2018/08/LicenseSum 2018/08/input.txt
-
+echo -n "9.1: "
+./2018/09/marble.php 441 71032
+echo -n "9.2: "
+./2018/09/marble.php 441 7103200
