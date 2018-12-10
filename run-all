@@ -1,18 +1,18 @@
 #!/usr/bin/env sh
 
-./2018/1/1.sh 2018/1/input.txt
-./2018/1/2.sh 2018/1/input.txt
+./2018/01/1.sh 2018/01/input.txt
+./2018/01/2.sh 2018/01/input.txt
 echo -n "2.1: "
-./2018/2/checksum.lua 2018/2/input.txt
+./2018/02/checksum.lua 2018/02/input.txt
 echo -n "2.2: "
-./2018/2/boxes.lua 2018/2/input.txt
+./2018/02/boxes.lua 2018/02/input.txt
 echo -n "3.1: "
-./2018/3/overlapping.py 2018/3/input.txt
+./2018/03/overlapping.py 2018/03/input.txt
 echo -n "3.2: "
-./2018/3/intact.py 2018/3/input.txt
-java 2018/4/Strategy1.java 2018/4/input.txt
-cc 2018/5/polymer.c && ./a.out 2018/5/input.txt && rm a.out
-rustc 2018/7/sleigh.rs && ./sleigh 2018/7/input.txt && rm sleigh
+./2018/03/intact.py 2018/03/input.txt
+java 2018/04/Strategy1.java 2018/04/input.txt
+cc 2018/05/polymer.c && ./a.out 2018/05/input.txt && rm a.out
+rustc 2018/07/sleigh.rs && ./sleigh 2018/07/input.txt && rm sleigh
 echo -n "8.1: "
-ghc 2018/8/LicenseSum.hs && ./2018/8/LicenseSum 2018/8/input.txt
+ghc 2018/08/LicenseSum.hs 1>/dev/null && ./2018/08/LicenseSum 2018/08/input.txt
 
