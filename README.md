@@ -11,6 +11,6 @@ I try and use different tools and approaches each day, just for fun.
 - Day 6: -
 - Day 7: Rust
 - Day 8: Haskell
-- Day 9: -
+- Day 9: PHP
 - Day 10: R
 
