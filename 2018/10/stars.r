@@ -3,12 +3,23 @@
 positions = read.csv("pos.txt")
 velocities = read.csv("vel.txt")
 
-par(mar = c(0,0,0,0))
+par(mar = c(0,0,1,0))
+par(pch=19)
 
-for (i in 1:20000) {
+minVar <- 1000000000000
+
+i <- 0
+repeat {
 	positions <- positions + velocities
-	if (positions[1,1] < 500 && positions[1,1] > -500) {
-		plot(positions, asp=1, main=i)
+
+	currentVar <- var(positions[,1])
+
+	if (minVar > currentVar) {
+		minVar <- currentVar
+	} else {
+		plot(positions - velocities, asp=1, main=i)
+		break
 	}
+	i <- i + 1
 }
 
