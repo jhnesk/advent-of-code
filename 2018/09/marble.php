@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+#!/usr/bin/php -dmemory_limit=800M
 <?php
 gc_disable();
 
