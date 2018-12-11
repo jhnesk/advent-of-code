@@ -13,7 +13,7 @@ echo -n "3.2: "
 java 2018/04/Strategy1.java 2018/04/input.txt
 cc 2018/05/polymer.c && ./a.out 2018/05/input.txt && rm a.out
 rustc 2018/07/sleigh.rs && ./sleigh 2018/07/input.txt && rm sleigh
-ghc 2018/08/LicenseSum.hs 1>/dev/null && ./2018/08/LicenseSum 2018/08/input.txt
+ghc 2018/08/LicenseSum.hs 1>/dev/null && ./2018/08/LicenseSum 2018/08/input.txt && rm 2018/08/LicenseSum 2018/08/LicenseSum.hi 2018/08/LicenseSum.o
 echo -n "9.1: "
 ./2018/09/marble.php 441 71032
 echo -n "9.2: "
