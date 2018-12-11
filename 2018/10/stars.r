@@ -18,7 +18,8 @@ repeat {
 	} else {
 		# If the variation starts to rise, last position was correct.
 		# Plot the coordinates.
-		plot(positions - velocities, asp=1, main=i)
+		positions <- positions - velocities
+		plot(positions, ylim = rev(range(positions[1,])), asp=1, main=i)
 		break
 	}
 	i <- i + 1
