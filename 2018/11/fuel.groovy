@@ -32,6 +32,17 @@ def gridSum = { int x, int y, int s ->
 	return sum
 }
 
+def borderSum = { int x, int y, int s ->
+	sum = 0
+	for (a = 0; a < s; a++) {
+		sum += fuelCells[x+s-2][y+a-1];
+	}
+	for (a = 0; a < s; a++) {
+		sum += fuelCells[x+a-1][y+s-2];
+	}
+	return sum
+}
+
 def maxX = 0
 def maxY = 0
 def maxValue = 0;
@@ -52,16 +63,17 @@ print maxX
 print "," 
 println maxY
 
-/*
 maxX = 0
 maxY = 0
 maxValue = 0
 def maxSize = 0
 
-for (s = 1; s <= 300; s++) {
-	for (x = 1; x <= 301-s; x++) {
-		for (y = 1; y <= 301-s; y++) {
-			sum = gridSum(x, y, s)
+for (x = 1; x <= 300; x++) {
+	for (y = 1; y <= 300; y++) {
+		maxSquare = Math.min(301-y, 301-x);
+		sum = 0
+		for (s = 1; s <= maxSquare; s++) {
+			sum += borderSum(x, y, s);
 			if (sum > maxValue) {
 				maxX = x
 				maxY = y
@@ -78,5 +90,4 @@ print ","
 print maxY
 print "," 
 println maxSize
-*/
 
