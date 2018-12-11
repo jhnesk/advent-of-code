@@ -16,9 +16,9 @@ def powerLevel = { int x, int y ->
 }
 
 def fuelCells = new int[300][300]
-for (i = 0; i < 300; i++) {
-	for (j = 0; j < 300; j++) {
-		fuelCells[i][j] = powerLevel(i+1, j+1);
+for (x = 0; x < 300; x++) {
+	for (y = 0; y < 300; y++) {
+		fuelCells[x][y] = powerLevel(x+1, y+1);
 	}
 }
 
@@ -26,7 +26,7 @@ def gridSum = { int x, int y, int s ->
 	sum = 0
 	for (a = 0; a < 3; a++) {
 		for (b = 0; b < 3; b++) {
-			sum += fuelCells[x+a-1][y+b-1];
+			sum += fuelCells[x+a][y+b];
 		}
 	}
 	return sum
@@ -35,10 +35,10 @@ def gridSum = { int x, int y, int s ->
 def borderSum = { int x, int y, int s ->
 	sum = 0
 	for (a = 0; a < s; a++) {
-		sum += fuelCells[x+s-2][y+a-1];
+		sum += fuelCells[x+s-1][y+a];
 	}
-	for (a = 0; a < s; a++) {
-		sum += fuelCells[x+a-1][y+s-2];
+	for (a = 0; a < s-1; a++) {
+		sum += fuelCells[x+a][y+s-1];
 	}
 	return sum
 }
@@ -47,12 +47,12 @@ def maxX = 0
 def maxY = 0
 def maxValue = 0;
 
-for (x = 1; x <= 298; x++) {
-	for (y = 1; y <= 298; y++) {
+for (x = 0; x < 300-3; x++) {
+	for (y = 0; y < 300-3; y++) {
 		sum = gridSum(x, y, 3)
 		if (sum > maxValue) {
-			maxX = x
-			maxY = y
+			maxX = x+1
+			maxY = y+1
 			maxValue = sum
 		}
 	}
@@ -68,15 +68,15 @@ maxY = 0
 maxValue = 0
 def maxSize = 0
 
-for (x = 1; x <= 300; x++) {
-	for (y = 1; y <= 300; y++) {
-		maxSquare = Math.min(301-y, 301-x);
+for (x = 0; x < 300; x++) {
+	for (y = 0; y < 300; y++) {
+		maxSquare = Math.min(300-y, 300-x)
 		sum = 0
 		for (s = 1; s <= maxSquare; s++) {
-			sum += borderSum(x, y, s);
+			sum += borderSum(x, y, s)
 			if (sum > maxValue) {
-				maxX = x
-				maxY = y
+				maxX = x+1
+				maxY = y+1
 				maxSize = s
 				maxValue = sum
 			}
@@ -90,4 +90,3 @@ print ","
 print maxY
 print "," 
 println maxSize
-
