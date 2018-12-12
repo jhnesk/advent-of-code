@@ -18,9 +18,9 @@ for (my $generation=0; $generation<20; $generation++) {
     $firstPot -= 2; # only the first two makes it to the next state...
 
     my $next_state = "";
- 
+
     my $length = length($state)-4;
-    for (my $i=0; $i<$length; $i++) {
+    for (my $i=2; $i<$length; $i++) {
         my $key = substr($state, $i, 5);
         $next_state .= $rules{$key};
     }
@@ -31,14 +31,18 @@ for (my $generation=0; $generation<20; $generation++) {
     $state = $next_state;
 }
 
-my $sum = 0;
-my $value = $firstPot;
-for (split //, $state) {
-    if ($_ eq '#') {
-        $sum += $value;
+sub calculateSum {
+	my $state = shift;
+	my $value = shift;
+    my $sum = 0;
+    for (split //, $state) {
+        if ($_ eq '#') {
+            $sum += $value;
+        }
+        $value++;
     }
-    $value++;
+    return $sum;
 }
 
-print "12.1: $sum\n";
+print "12.1: ".calculateSum($state, $firstPot)."\n";
 
