@@ -20,7 +20,7 @@ for (my $generation=0; $generation<20; $generation++) {
     my $next_state = "";
 
     my $length = length($state)-4;
-    for (my $i=2; $i<$length; $i++) {
+    for (my $i=0; $i<$length; $i++) {
         my $key = substr($state, $i, 5);
         $next_state .= $rules{$key};
     }
@@ -30,6 +30,9 @@ for (my $generation=0; $generation<20; $generation++) {
     $firstPot += $prev_length - length($next_state);
     $state = $next_state;
 }
+
+print "12.1: ".calculateSum($state, $firstPot)."\n";
+
 
 sub calculateSum {
 	my $state = shift;
@@ -43,6 +46,3 @@ sub calculateSum {
     }
     return $sum;
 }
-
-print "12.1: ".calculateSum($state, $firstPot)."\n";
-
