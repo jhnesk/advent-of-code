@@ -46,3 +46,6 @@ Groovy
 === 12/12
 Perl
 
+== Unlicense
+
+include::LICENSE[]
