@@ -3,8 +3,6 @@
 positions = read.csv("pos.txt")
 velocities = read.csv("vel.txt")
 
-par(mar = c(0,0,1,0))
-par(pch=19)
 
 minVar <- var(positions[,1])
 
@@ -19,7 +17,11 @@ repeat {
 		# If the variation starts to rise, last position was correct.
 		# Plot the coordinates.
 		positions <- positions - velocities
+		png(filename="stars.png")
+		par(mar = c(0,0,1,0))
+		par(pch=19)
 		plot(positions, ylim = rev(range(positions[1,])), asp=1, main=i)
+		dev.off()
 		break
 	}
 	i <- i + 1
