@@ -61,7 +61,6 @@ void populate_map(char* fileName, tile_t* map[150][150])
 {
 	FILE* input = fopen(fileName, "r");
 	int character;
-	int carts = 0;
 	int x=0;
 	int y=0;
 
@@ -77,6 +76,21 @@ void populate_map(char* fileName, tile_t* map[150][150])
 		}
 	}
 	fclose(input);
+}
+
+int count_carts(char* fileName)
+{
+	FILE* input = fopen(fileName, "r");
+	int carts = 0;
+	int ch;
+
+	while ((ch = fgetc(input)) != EOF) {
+		if (ch == '>' || ch == '<' || ch == 'v' || ch == '^') {
+			carts++;
+		}
+	}
+	fclose(input);
+	return carts;
 }
 
 void print(tile_t* map[150][150])
@@ -223,7 +237,7 @@ int main(int argc, char** argv)
 	tile_t* map[150][150];
 	populate_map(argv[1], map);
 
-	int cart_count = 17;
+	int cart_count = count_carts(argv[1]);
 	cart_t* carts[cart_count];
 	int new_cart_count = cart_count;
 	populate_cart_order(map, carts);
