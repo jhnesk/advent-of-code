@@ -20,3 +20,4 @@ echo -n "9.2: "
 ./2018/09/marble.php 441 7103200
 ./2018/11/fuel.groovy 5093
 ./2018/12/plants.pl 2018/12/input.txt
+cc 2018/13/cart-simulator.c && ./a.out 2018/13/input.txt && rm a.out

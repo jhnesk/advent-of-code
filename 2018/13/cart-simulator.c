@@ -2,12 +2,11 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #define LEFT_TURN 0
 #define STRAIGHT 1 
 #define RIGHT_TURN 2
-
-#define CART_COUNT 17
 
 typedef struct cart
 {
@@ -15,7 +14,7 @@ typedef struct cart
 	int y;
 	char direction;
 	int last_turn;
-	int move_count;
+	bool crashed;
 } cart_t;
 
 typedef struct tile
@@ -41,7 +40,7 @@ cart_t* create_cart(int x, int y, char direction) {
 	cart->y = y;
 	cart->direction = direction;
 	cart->last_turn = RIGHT_TURN;
-	cart->move_count = 0;
+	cart->crashed = false;
 	return cart;
 }
 
@@ -58,8 +57,9 @@ cart_t* map_cart(int x, int y, char c)
 	}
 }
 
-void populate_map(FILE* input, tile_t* map[150][150])
+void populate_map(char* fileName, tile_t* map[150][150])
 {
+	FILE* input = fopen(fileName, "r");
 	int character;
 	int carts = 0;
 	int x=0;
@@ -76,6 +76,7 @@ void populate_map(FILE* input, tile_t* map[150][150])
 			x++;
 		}
 	}
+	fclose(input);
 }
 
 void print(tile_t* map[150][150])
@@ -143,8 +144,14 @@ void intersection_turn(cart_t* cart) {
 	}
 }
 
-void move(tile_t* map[150][150], cart_t* cart)
+int first_collision = true;
+
+// return true on crash
+bool move(tile_t* map[150][150], cart_t* cart)
 {
+	if (cart == NULL) {
+		return false;
+	}
 	int x = cart->x;
 	int y = cart->y;
 	map[x][y]->cart = NULL;
@@ -155,8 +162,14 @@ void move(tile_t* map[150][150], cart_t* cart)
 		case 'v': y++; break;
 	}
 	if (map[x][y]->cart != NULL) {
-		printf("COLLISION AT %d,%d\n", x, y);
-		raise(SIGTERM);
+		if (first_collision) {
+			printf("13.1: %d,%d\n", x, y);
+			first_collision = false;
+		}
+		map[x][y]->cart->crashed = true;
+		cart->crashed = true;
+		map[x][y]->cart = NULL;
+		return true;
 	}
 	cart->x = x;
 	cart->y = y;
@@ -189,9 +202,10 @@ void move(tile_t* map[150][150], cart_t* cart)
 			intersection_turn(cart);
 			break;
 	}
+	return false;
 }
 
-void populate_cart_order(tile_t* map[150][150], cart_t* carts[CART_COUNT])
+void populate_cart_order(tile_t* map[150][150], cart_t** carts)
 {
 	int i = 0;
 	for (int y = 0; y < 150; y++) {
@@ -206,19 +220,23 @@ void populate_cart_order(tile_t* map[150][150], cart_t* carts[CART_COUNT])
 
 int main(int argc, char** argv)
 {
-	FILE* fp = fopen(argv[1], "r");
 	tile_t* map[150][150];
-	populate_map(fp, map);
-	fclose(fp);
+	populate_map(argv[1], map);
 
-	cart_t* carts[CART_COUNT];
-
-	while (1) {
-		populate_cart_order(map, carts);
-		for (int c = 0 ; c < CART_COUNT ; c++) {
-			move(map, carts[c]);
+	int cart_count = 17;
+	cart_t* carts[cart_count];
+	int new_cart_count = cart_count;
+	populate_cart_order(map, carts);
+	while (cart_count > 1) {
+		for (int c = 0 ; c < cart_count ; c++) {
+			if (!carts[c]->crashed) {
+				if (move(map, carts[c])) {
+					new_cart_count-=2;
+				}
+			}
 		}
-		//print(map);
-		//fflush(stdout);
+		cart_count = new_cart_count;
+		populate_cart_order(map, carts);
 	}
+	printf("13.2: %d,%d\n", carts[0]->x, carts[0]->y);
 }
