@@ -1,0 +1,47 @@
+= advent-of-code
+
+In 2018 I'm using different tools and languages to mix it up.  First I
+tried to use different every day, but it's getting a bit too much new
+to learn every day.
+
+=== 1/12
+Shell, with awk and bc.
+
+=== 2/12
+Lua
+
+=== 3/12
+Python
+
+=== 4/12
+Java
+
+=== 5/12
+C
+
+=== 6/12
+-
+
+=== 7/12
+Rust
+
+=== 8/12
+Haskell
+
+=== 9/12
+PHP
+
+=== 10/12
+Using R to generate this plot:
+
+image::2018/10/stars.png[]
+
+=== 11/12
+Groovy
+
+=== 12/12
+Perl
+
+=== 13/12
+C
+
