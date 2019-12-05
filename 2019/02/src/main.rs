@@ -24,25 +24,22 @@ fn main() {
     program[2] = 2;
 
     loop {
-        let instruction = program[i];
+        let opcode = program[i];
 
-        match instruction {
+        match opcode {
             1 => {
-                let index_a = program[i+1];
-                let index_b = program[i+2];
-                let index_out = program[i+3];
-                program[index_out] = program[index_a] + program[index_b];
+                let (a, b, c) = (program[i+1], program[i+2], program[i+3]);
+                program[c] = program[a] + program[b];
+                i = i + 4;
             },
             2 => {
-                let index_a = program[i+1];
-                let index_b = program[i+2];
-                let index_out = program[i+3];
-                program[index_out] = program[index_a] * program[index_b];
+                let (a, b, c) = (program[i+1], program[i+2], program[i+3]);
+                program[c] = program[a] * program[b];
+                i = i + 4;
             },
             99 => break,
             _ => panic!()
         }
-        i = i + 4;
     }
     println!("{}", program[0]);
 }
