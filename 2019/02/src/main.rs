@@ -3,6 +3,21 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::usize;
 
+fn read_input() -> Vec<usize> {
+    let args: Vec<String> = env::args().collect();
+    let input = File::open(&args[1]).expect("Cannot open file");
+    let input = BufReader::new(input);
+
+    let line = input.lines().take(1)
+        .filter_map(|result| result.ok())
+        .collect::<String>();
+
+    return line.split(',')
+        .map(|s| s.parse::<usize>())
+        .filter_map(|result| result.ok())
+        .collect::<Vec<usize>>();
+}
+
 fn execute(mut program : Vec<usize>) -> usize {
     let mut i : usize = 0;
 
@@ -29,18 +44,7 @@ fn execute(mut program : Vec<usize>) -> usize {
 }
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let input = File::open(&args[1]).expect("Cannot open file");
-    let input = BufReader::new(input);
-
-    let line = input.lines().take(1)
-        .filter_map(|result| result.ok())
-        .collect::<String>();
-
-    let mut program : Vec<usize> = line.split(',') 
-        .map(|s| s.parse::<usize>())
-        .filter_map(|result| result.ok())
-        .collect();
+    let mut program = read_input();
 
     // Restore the program!
     program[1] = 12;
