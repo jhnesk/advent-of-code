@@ -50,5 +50,16 @@ fn main() {
     program[1] = 12;
     program[2] = 2;
 
-    println!("{}", execute(program));
+    println!("Answer for part 1: {}", execute(program));
+
+    for noun in 0..100 {
+        for verb in 0..100 {
+            let mut program = read_input();
+            program[1] = noun;
+            program[2] = verb;
+            if execute(program) == 19690720 {
+                println!("Answer for part 2: {}", noun * 100 + verb);
+            }
+        }
+    }
 }
