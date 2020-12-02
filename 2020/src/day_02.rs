@@ -34,27 +34,40 @@ impl FromStr for Policy {
     }
 }
 
-fn parse(input: BufReader<File>) -> () {
-    input.lines()
-        .filter_map(|result| result.ok())
-        .filter_map(|s| Policy::from_str(&s).ok());
-}
-
-fn verify(policy: &Policy) -> bool {
+fn verify_a(policy: &Policy) -> bool {
     let count = policy.password.matches(policy.token).count();
     return count >= policy.min && count <= policy.max;
+}
+
+fn verify_b(policy: &Policy) -> bool {
+    let first = policy.password.chars().nth(policy.min-1).unwrap();
+    let second = policy.password.chars().nth(policy.max-1).unwrap();
+    if(first == policy.token && second != policy.token) {
+        return true;
+    } else if (first != policy.token && second == policy.token) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 pub fn a(input: BufReader<File>) {
     let result = input.lines()
         .filter_map(|result| result.ok())
         .filter_map(|s| Policy::from_str(&s).ok())
-        .filter(|p| verify(p))
+        .filter(|p| verify_a(p))
         .count();
     println!("Answer to 02.A: {}", result);
 }
 
 pub fn b(input: BufReader<File>) {
-    println!("Answer to 02.B: {}", "Not implemented!");
+    let result = input.lines()
+        .filter_map(|result| result.ok())
+        .filter_map(|s| Policy::from_str(&s).ok())
+        .filter(|p| verify_b(p))
+        .count();
+
+    println!("Answer to 02.B: {}", result);
 }
+
 
