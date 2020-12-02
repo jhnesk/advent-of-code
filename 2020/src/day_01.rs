@@ -1,21 +1,16 @@
 use std::usize;
-use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-fn read_input() -> Vec<usize> {
-    let args: Vec<String> = env::args().collect();
-    let input = File::open(&args[1]).expect("Cannot open file");
-    let input = BufReader::new(input);
-
+fn parse(input: BufReader<File>) -> Vec<usize> {
     return input.lines()
         .filter_map(|result| result.ok())
         .filter_map(|s| s.parse::<usize>().ok())
         .collect::<Vec<usize>>();
 }
 
-pub fn a() {
-    let input = read_input();
+pub fn a(input: BufReader<File>) {
+    let input = parse(input);
     for a in &input {
         for b in &input {
             if a + b == 2020 {
@@ -26,8 +21,8 @@ pub fn a() {
     }
 }
 
-pub fn b() {
-    let input = read_input();
+pub fn b(input: BufReader<File>) {
+    let input = parse(input);
     for a in &input {
         for b in &input {
             for c in &input {
@@ -39,5 +34,4 @@ pub fn b() {
         }
     }
 }
-
 
